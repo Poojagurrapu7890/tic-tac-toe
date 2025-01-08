@@ -3,7 +3,6 @@ const rows = 22;
 const cols = 22;
 let cells = [];
 let interval = null;
-
 function createGrid() {
   grid.innerHTML = ""; 
   cells = Array.from({ length: rows }, () =>
@@ -21,12 +20,10 @@ function createGrid() {
     }
   }
 }
-
 function toggleCell(row, col) {
   cells[row][col] = cells[row][col] === 0 ? 1 : 0;
   renderGrid();
 }
-
 function renderGrid() {
   const allCells = document.querySelectorAll(".cell");
   allCells.forEach(cell => {
@@ -39,12 +36,10 @@ function renderGrid() {
     }
   });
 }
-
 function countNeighbors(row, col) {
   const directions = [
     [-1, -1], [-1, 0], [-1, 1],
-    [0, -1],          [0, 1],
-    [1, -1], [1, 0], [1, 1],
+    [0, -1],[0, 1],[1, -1], [1, 0], [1, 1],
   ];
   let count = 0;
   directions.forEach(([dx, dy]) => {
@@ -56,7 +51,6 @@ function countNeighbors(row, col) {
   });
   return count;
 }
-
 function nextGeneration() {
   const newCells = Array.from({ length: rows }, () => Array(cols).fill(0));
   for (let i = 0; i < rows; i++) {
@@ -72,18 +66,15 @@ function nextGeneration() {
   cells = newCells;
   renderGrid();
 }
-
 function startGame() {
   if (!interval) {
     interval = setInterval(nextGeneration, 500); 
   }
 }
-
 function stopGame() {
   clearInterval(interval);
   interval = null;
 }
-
 function resetGame() {
   stopGame();
   createGrid();
@@ -92,3 +83,4 @@ document.getElementById("start").addEventListener("click", startGame);
 document.getElementById("stop").addEventListener("click", stopGame);
 document.getElementById("reset").addEventListener("click", resetGame);
 createGrid();
+
