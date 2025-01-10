@@ -15,12 +15,12 @@ function createGrid() {
       cell.classList.add("cell");
       cell.dataset.row = i;
       cell.dataset.col = j;
-      cell.addEventListener("click", () => toggleCell(i, j));
+      cell.addEventListener("click", () => change(i, j));
       grid.appendChild(cell);
     }
   }
 }
-function toggleCell(row, col) {
+function change(row, col) {
   cells[row][col] = cells[row][col] === 0 ? 1 : 0;
   renderGrid();
 }
@@ -83,4 +83,3 @@ document.getElementById("start").addEventListener("click", startGame);
 document.getElementById("stop").addEventListener("click", stopGame);
 document.getElementById("reset").addEventListener("click", resetGame);
 createGrid();
-
