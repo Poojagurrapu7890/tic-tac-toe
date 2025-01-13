@@ -5,7 +5,7 @@ class BattleshipGame:
     def __init__(self, root):
         self.root = root
         self.root.title("Battleship Game")
-        self.root.geometry("400x550")
+        self.root.geometry("400x500")
         self.root.configure(bg="#f0f8ff")
 
         self.opponent_grid = [["~"] * 5 for _ in range(5)]
@@ -17,9 +17,9 @@ class BattleshipGame:
         self.create_widgets()
 
     def place_opponent_ships(self):
-        for _ in range(3):  # Opponent has 3 ships
+        for _ in range(3):
             x, y = random.randint(0, 4), random.randint(0, 4)
-            while self.opponent_grid[x][y] == "S":  # Avoid overlapping ships
+            while self.opponent_grid[x][y] == "S":
                 x, y = random.randint(0, 4)
             self.opponent_grid[x][y] = "S"
 
@@ -49,46 +49,13 @@ class BattleshipGame:
             return
 
         if self.opponent_grid[x][y] == "S":
-            self.buttons[x][y].config(text="X", bg="red", fg="white")  # Hit
-            self.opponent_grid[x][y] = "~"
+            self.buttons[x][y].config(text="X", bg="red", fg="white")
             self.hits += 1
-            self.status_label.config(text=f"Hit! {3 - self.hits} ships left.")
         elif self.buttons[x][y]["text"] == "~":
-            self.buttons[x][y].config(text="O", bg="gray", fg="white")  # Miss
-            self.status_label.config(text=f"Miss! Turns left: {self.turns - 1}.")
-        else:
-            return
+            self.buttons[x][y].config(text="O", bg="gray", fg="white")
 
         self.turns -= 1
 
-        if self.hits == 3:
-            self.status_label.config(text="Congratulations! You win!")
-            self.reveal_ships()
-        elif self.turns == 0:
-            self.status_label.config(text="Game over! You ran out of turns.")
-            self.reveal_ships()
-
-    def reveal_ships(self):
-        for r in range(5):
-            for c in range(5):
-                if self.opponent_grid[r][c] == "S":
-                    self.buttons[r][c].config(text="S", bg="yellow", fg="black")  # Reveal ships
-    def restart_game(self):
-        # Reset game state
-        self.player_grid = [["~"] * 5 for _ in range(5)]
-        self.opponent_grid = [["~"] * 5 for _ in range(5)]
-        self.buttons = []
-        self.hits = 0
-        self.turns = 10
-
-        # Clear old widgets and reinitialize
-        for widget in self.root.winfo_children():
-            widget.destroy()
-        self.place_opponent_ships()
-        self.create_widgets()
-
-# Run the game
 root = tk.Tk()
 game = BattleshipGame(root)
 root.mainloop()
-
