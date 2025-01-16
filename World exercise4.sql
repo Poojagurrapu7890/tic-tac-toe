@@ -34,5 +34,9 @@ SELECT name
 FROM city 
 WHERE population BETWEEN 670000 AND 700000;
 
+SELECT name, population 
+FROM city 
+ORDER BY population DESC 
+LIMIT 10;
 
 
