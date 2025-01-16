@@ -42,3 +42,7 @@ LIMIT 10;
 SELECT district 
 FROM world.city 
 WHERE CountryCode = 'USA' AND population > 3000000;
+
+SELECT name,population,ID
+FROM city
+WHERE id IN (5,21,432,2021)
