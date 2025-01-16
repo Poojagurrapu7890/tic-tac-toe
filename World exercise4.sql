@@ -39,4 +39,6 @@ FROM city
 ORDER BY population DESC 
 LIMIT 10;
 
-
+SELECT district 
+FROM world.city 
+WHERE CountryCode = 'USA' AND population > 3000000;
