@@ -54,3 +54,25 @@ ON
     Customers.CustomerId = Invoices.CustomerId
 WHERE 
     Invoices.BillingCountry = 'Brazil';
+
+SELECT 
+    Artists.Name AS ArtistName,
+    COUNT(Tracks.TrackId) AS TotalTracks
+FROM 
+    Artists
+JOIN 
+    Albums
+ON 
+    Artists.ArtistId = Albums.ArtistId
+JOIN 
+    Tracks
+ON 
+    Albums.AlbumId = Tracks.AlbumId
+WHERE 
+    Tracks.GenreId = (SELECT GenreId FROM Genres WHERE Name = 'Rock')
+GROUP BY 
+    Artists.Name
+ORDER BY 
+    TotalTracks DESC
+LIMIT 10;
+
