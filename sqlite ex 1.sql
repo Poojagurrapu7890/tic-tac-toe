@@ -13,3 +13,9 @@ WHERE Name LIKE '%black%';
 
 SELECT DISTINCT BillingCountry
 FROM invoices
+
+SELECT BillingCity, SUM(Total) AS TotalAmount
+FROM invoices
+GROUP BY BillingCity
+ORDER BY TotalAmount DESC
+LIMIT 1;
