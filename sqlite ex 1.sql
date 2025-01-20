@@ -85,3 +85,17 @@ FROM
     Customers
 WHERE 
     Customers.Country != 'USA';
+
+SELECT 
+    Playlists.PlaylistId, 
+    COUNT(Playlist_Track.TrackId) AS TotalTracks
+FROM 
+    Playlists
+JOIN 
+    Playlist_Track ON Playlists.PlaylistId = Playlist_Track.PlaylistId
+GROUP BY 
+    Playlists.PlaylistId
+ORDER BY 
+    TotalTracks DESC;
+
+
