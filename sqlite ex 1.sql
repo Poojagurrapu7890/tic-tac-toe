@@ -25,3 +25,7 @@ FROM Invoices
 WHERE BillingCountry IS NOT NULL
 GROUP BY BillingCountry
 ORDER BY CustomerCount DESC;
+
+SELECT COUNT(*) 
+FROM Invoices
+WHERE InvoiceDate LIKE '2009%' OR InvoiceDate LIKE '2011%';
