@@ -34,3 +34,9 @@ SELECT *
 FROM Employees
 WHERE Title LIKE '%Sales support Agent%';
 
+-- SQLITE EX 2 --
+
+SELECT MediaTypeId, COUNT(*) AS UsageCount
+FROM Tracks
+GROUP BY MediaTypeId
+ORDER BY UsageCount DESC;
