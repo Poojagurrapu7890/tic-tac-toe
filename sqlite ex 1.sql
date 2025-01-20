@@ -76,3 +76,12 @@ ORDER BY
     TotalTracks DESC
 LIMIT 10;
 
+SELECT 
+    Customers.FirstName, 
+    Customers.LastName, 
+    Customers.CustomerId, 
+    Customers.Country
+FROM 
+    Customers
+WHERE 
+    Customers.Country != 'USA';
