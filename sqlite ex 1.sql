@@ -29,3 +29,8 @@ ORDER BY CustomerCount DESC;
 SELECT COUNT(*) 
 FROM Invoices
 WHERE InvoiceDate LIKE '2009%' OR InvoiceDate LIKE '2011%';
+
+SELECT *
+FROM Employees
+WHERE Title LIKE '%Sales support Agent%';
+
