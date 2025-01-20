@@ -98,4 +98,13 @@ GROUP BY
 ORDER BY 
     TotalTracks DESC;
 
-
+SELECT 
+    Albums.AlbumId, 
+    Genres.Name AS Genre
+FROM 
+    Tracks
+JOIN 
+    Albums ON Tracks.AlbumId = Albums.AlbumId
+JOIN 
+    Genres ON Tracks.GenreId = Genres.GenreId;
+	
