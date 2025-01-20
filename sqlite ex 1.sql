@@ -19,3 +19,9 @@ FROM invoices
 GROUP BY BillingCity
 ORDER BY TotalAmount DESC
 LIMIT 1;
+
+SELECT BillingCountry, COUNT(DISTINCT CustomerId) AS CustomerCount
+FROM Invoices
+WHERE BillingCountry IS NOT NULL
+GROUP BY BillingCountry
+ORDER BY CustomerCount DESC;
