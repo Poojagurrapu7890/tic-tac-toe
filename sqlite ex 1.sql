@@ -40,3 +40,17 @@ SELECT MediaTypeId, COUNT(*) AS UsageCount
 FROM Tracks
 GROUP BY MediaTypeId
 ORDER BY UsageCount DESC;
+
+SELECT 
+    Customers.FirstName || ' ' || Customers.LastName AS FullName,
+    Invoices.InvoiceId,
+    Invoices.InvoiceDate,
+    Invoices.BillingCountry
+FROM 
+    Customers
+JOIN 
+    Invoices
+ON 
+    Customers.CustomerId = Invoices.CustomerId
+WHERE 
+    Invoices.BillingCountry = 'Brazil';
