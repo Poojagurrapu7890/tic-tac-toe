@@ -98,4 +98,19 @@ WHERE
 GROUP BY 
     order_header.order_id, order_header.customer_id, online_customer.CUSTOMER_FNAME, online_customer.CUSTOMER_LNAME;
     
+SELECT 
+    order_header.customer_id,
+    CONCAT(online_customer.first_name, ' ', online_customer.last_name) AS customer_full_name,
+    order_header.order_id,
+    SUM(order_items.product_quantity) AS total_order_quantity
+FROM 
+    order_header
+JOIN 
+    online_customer ON order_header.customer_id = online_customer.customer_id
+JOIN 
+    order_items ON order_header.order_id = order_items.order_id
+GROUP BY 
+    order_header.customer_id, online_customer.first_name, online_customer.last_name, order_header.order_id
+HAVING 
+    SUM(order_items.product_quantity) > 10;
 
