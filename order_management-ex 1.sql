@@ -80,3 +80,22 @@ LEFT JOIN
     order_items ON order_header.order_id = order_items.order_id
 LEFT JOIN 
     product ON order_items.product_id = product.product_id;
+
+
+SELECT 
+    order_header.order_id,
+    order_header.customer_id,
+    CONCAT(online_customer.CUSTOMER_FNAME, ' ', online_customer.CUSTOMER_LNAME) AS customer_full_name,
+    SUM(order_items.product_quantity) AS total_quantity
+FROM 
+    order_header
+JOIN 
+    online_customer ON order_header.customer_id = online_customer.customer_id
+JOIN 
+    order_items ON order_header.order_id = order_items.order_id
+WHERE 
+    order_header.order_id > 10060
+GROUP BY 
+    order_header.order_id, order_header.customer_id, online_customer.CUSTOMER_FNAME, online_customer.CUSTOMER_LNAME;
+    
+
