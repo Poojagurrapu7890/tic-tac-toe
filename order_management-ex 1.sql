@@ -100,7 +100,7 @@ GROUP BY
     
 SELECT 
     order_header.customer_id,
-    CONCAT(online_customer.first_name, ' ', online_customer.last_name) AS customer_full_name,
+    CONCAT(online_customer.CUSTOMER_FNAME, online_customer.CUSTOMER_LNAME) AS customer_full_name,
     order_header.order_id,
     SUM(order_items.product_quantity) AS total_order_quantity
 FROM 
@@ -110,7 +110,27 @@ JOIN
 JOIN 
     order_items ON order_header.order_id = order_items.order_id
 GROUP BY 
-    order_header.customer_id, online_customer.first_name, online_customer.last_name, order_header.order_id
+    order_header.customer_id, online_customer.CUSTOMER_FNAME, online_customer.CUSTOMER_LNAME, order_header.order_id
 HAVING 
     SUM(order_items.product_quantity) > 10;
+
+SELECT 
+    CARTON.CARTON_ID, 
+    (CARTON.LEN * CARTON.WIDTH * CARTON.HEIGHT) AS carton_volume
+FROM 
+    CARTON
+WHERE 
+    (CARTON.LEN * CARTON.WIDTH * CARTON.HEIGHT) > (
+        SELECT 
+            SUM(PRODUCT.LEN * PRODUCT.WIDTH * PRODUCT.HEIGHT * ORDER_ITEMS.PRODUCT_QUANTITY) AS total_item_volume
+        FROM 
+            ORDER_ITEMS
+        INNER JOIN PRODUCT ON ORDER_ITEMS.PRODUCT_ID = PRODUCT.PRODUCT_ID
+        WHERE 
+            ORDER_ITEMS.ORDER_ID = 10006
+    )
+ORDER BY 
+    carton_volume ASC
+LIMIT 1;
+
 
