@@ -20,3 +20,19 @@ FROM
 ORDER BY 
    product_class_code DESC
 LIMIT 60;
+
+
+SELECT 
+    country, 
+    COUNT(city) AS city_count
+FROM 
+    ADDRESS
+WHERE 
+    country NOT IN ('USA', 'MALAYSIA')
+GROUP BY 
+    country
+HAVING 
+    city_count > 1
+ORDER BY 
+    city_count DESC
+LIMIT 2;
